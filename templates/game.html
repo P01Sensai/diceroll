@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Math Game</title>
+    <title>Play Game</title>
     <style>
         body { font-family: sans-serif; text-align: center; margin-top: 50px; background: #f0f8ff; }
         .box { background: white; width: 300px; margin: auto; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .problem { font-size: 50px; font-weight: bold; color: #333; }
         input { font-size: 24px; padding: 5px; width: 100px; text-align: center; }
         button { background: #28a745; color: white; font-size: 18px; padding: 10px 20px; border: none; border-radius: 5px; margin-top: 15px; cursor: pointer; }
+        .back-link { display: block; margin-top: 20px; color: #666; text-decoration: none; font-size: 14px; }
     </style>
 </head>
 <body>
     <div class="box">
-        <h1>Math Quiz</h1>
         <div class="problem">
-            {{ n1 }} + {{ n2 }}
+            {{ n1 }} {{ symbol }} {{ n2 }}
         </div>
         
         <form action="/check" method="POST">
             <input type="number" name="guess" required autofocus>
             
             <input type="hidden" name="real_ans" value="{{ real_ans }}">
+            <input type="hidden" name="mode" value="{{ mode }}">
             
             <br>
             <button type="submit">Submit Answer</button>
         </form>
+
+        <a href="/" class="back-link">← Back to Menu</a>
     </div>
 </body>
 </html>

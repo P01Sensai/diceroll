@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            text-align: center; 
+            margin-top: 50px; 
+            background: #f0f8ff; 
+        }
+        .box { 
+            background: white; 
+            width: 300px; 
+            margin: auto; 
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+        }
+        a { 
+            text-decoration: none; 
+            background: #007bff; 
+            color: white; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            display: inline-block; 
+            margin-top: 20px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1 style="color: {{ color }};">
+            {{ message }}
+        </h1>
+        
+        <a href="/">Next Question </a>
+    </div>
+</body>
+</html>

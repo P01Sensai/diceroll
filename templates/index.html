@@ -1,55 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dice Roller</title>
+    <title>Math Game</title>
     <style>
-        
-        body {
-            font-family: sans-serif;
-            text-align: center;
-            background-color: #f4f4f9;
-            margin-top: 100px;
-        }
-        .box {
-            background: white;
-            width: 300px;
-            margin: auto;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-        }
-        .number-display {
-            font-size: 80px;
-            color: #333;
-            margin: 20px 0;
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 18px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
+        body { font-family: sans-serif; text-align: center; margin-top: 50px; background: #f0f8ff; }
+        .box { background: white; width: 300px; margin: auto; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .problem { font-size: 50px; font-weight: bold; color: #333; }
+        input { font-size: 24px; padding: 5px; width: 100px; text-align: center; }
+        button { background: #28a745; color: white; font-size: 18px; padding: 10px 20px; border: none; border-radius: 5px; margin-top: 15px; cursor: pointer; }
     </style>
 </head>
 <body>
-
     <div class="box">
-        <h1>Dice Simulator</h1>
-        
-        <div class="number-display">
-            {{ dice_value }}
+        <h1>Math Quiz</h1>
+        <div class="problem">
+            {{ n1 }} + {{ n2 }}
         </div>
-
-        <form action="/roll">
-            <button type="submit">Roll Dice</button>
+        
+        <form action="/check" method="POST">
+            <input type="number" name="guess" required autofocus>
+            
+            <input type="hidden" name="real_ans" value="{{ real_ans }}">
+            
+            <br>
+            <button type="submit">Submit Answer</button>
         </form>
     </div>
-
 </body>
 </html>

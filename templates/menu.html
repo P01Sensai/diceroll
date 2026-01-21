@@ -1,41 +1,81 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Math Menu</title>
+    <title>Math Master</title>
     <style>
-        body { font-family: sans-serif; text-align: center; background: #f0f8ff; margin-top: 50px; }
-        .box { background: white; width: 350px; margin: auto; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .option { display: flex; justify-content: space-between; align-items: center; margin: 15px 0; padding: 10px; border-bottom: 1px solid #eee; }
-        .label { font-size: 20px; font-weight: bold; color: #333; }
-        .btn { text-decoration: none; background: #007bff; color: white; padding: 8px 15px; border-radius: 5px; font-weight: bold; }
-        .btn:hover { background: #0056b3; }
+        /* Modern Reset & Font */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #eef2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            width: 350px;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        h1 { color: #2c3e50; margin-bottom: 30px; font-size: 28px; }
+        
+        /* The Option Row */
+        .option {
+            background: #f8f9fa;
+            margin-bottom: 12px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+        .option:hover { transform: scale(1.02); background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        
+        .label { font-weight: 600; color: #555; }
+        
+        /* The Button */
+        .btn {
+            text-decoration: none;
+            background-color: #4a90e2;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .btn:hover { background-color: #357abd; }
+        
+        /* Specific Colors for variety */
+        .mix-mode .btn { background-color: #6c5ce7; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h1>Math Master 🎮</h1>
+    <div class="card">
+        <h1>Math Master 🎓</h1>
         
         <div class="option">
             <span class="label">Addition (+)</span>
             <a href="/play/add" class="btn">Start</a>
         </div>
-
         <div class="option">
             <span class="label">Subtraction (-)</span>
             <a href="/play/sub" class="btn">Start</a>
         </div>
-
         <div class="option">
             <span class="label">Multiplication (×)</span>
             <a href="/play/mul" class="btn">Start</a>
         </div>
-
         <div class="option">
             <span class="label">Division (÷)</span>
             <a href="/play/div" class="btn">Start</a>
         </div>
-
-        <div class="option">
+        <div class="option mix-mode">
             <span class="label">Mixed Mode (?)</span>
             <a href="/play/mix" class="btn">Start</a>
         </div>

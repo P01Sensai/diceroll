@@ -1,33 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Play Game</title>
+    <title>Play</title>
     <style>
-        body { font-family: sans-serif; text-align: center; margin-top: 50px; background: #f0f8ff; }
-        .box { background: white; width: 300px; margin: auto; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .problem { font-size: 50px; font-weight: bold; color: #333; }
-        input { font-size: 24px; padding: 5px; width: 100px; text-align: center; }
-        button { background: #28a745; color: white; font-size: 18px; padding: 10px 20px; border: none; border-radius: 5px; margin-top: 15px; cursor: pointer; }
-        .back-link { display: block; margin-top: 20px; color: #666; text-decoration: none; font-size: 14px; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #eef2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            width: 320px;
+            padding: 50px 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .problem {
+            font-size: 64px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+        input {
+            width: 120px;
+            font-size: 32px;
+            text-align: center;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            outline: none;
+            color: #333;
+            transition: border-color 0.2s;
+        }
+        input:focus { border-color: #4a90e2; }
+        
+        button {
+            display: block;
+            width: 100%;
+            margin-top: 25px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        button:hover { opacity: 0.9; }
+        
+        .back-link {
+            display: block;
+            margin-top: 25px;
+            color: #95a5a6;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back-link:hover { color: #7f8c8d; }
     </style>
 </head>
 <body>
-    <div class="box">
+    <div class="card">
         <div class="problem">
             {{ n1 }} {{ symbol }} {{ n2 }}
         </div>
         
         <form action="/check" method="POST">
-            <input type="number" name="guess" required autofocus>
-            
+            <input type="number" name="guess" required autofocus placeholder="?">
             <input type="hidden" name="real_ans" value="{{ real_ans }}">
             <input type="hidden" name="mode" value="{{ mode }}">
-            
-            <br>
-            <button type="submit">Submit Answer</button>
+            <button type="submit">Check Answer</button>
         </form>
 
-        <a href="/" class="back-link">← Back to Menu</a>
+        <a href="/" class="back-link">Cancel & Return to Menu</a>
     </div>
 </body>
 </html>

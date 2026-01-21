@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dice Roller</title>
+    <style>
+        
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+            margin-top: 100px;
+        }
+        .box {
+            background: white;
+            width: 300px;
+            margin: auto;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        }
+        .number-display {
+            font-size: 80px;
+            color: #333;
+            margin: 20px 0;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h1>Dice Simulator</h1>
+        
+        <div class="number-display">
+            {{ dice_value }}
+        </div>
+
+        <form action="/roll">
+            <button type="submit">Roll Dice</button>
+        </form>
+    </div>
+
+</body>
+</html>

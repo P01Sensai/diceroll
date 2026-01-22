@@ -48,7 +48,7 @@ def check_answer():
     mode = request.form['mode'] 
     
     if user_guess == real_answer:
-        msg = "Correct! You're a Star! 🌟"
+        msg = "Correct!🌟"
         color = "green"
     else:
         msg = f"Oops! The answer was {real_answer}. 😅"

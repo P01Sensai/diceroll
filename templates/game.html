@@ -45,30 +45,37 @@
             list-style: none;
             width: 20px;
             height: 20px;
-            color: rgba(255, 255, 255, 0.4); /* High visibility */
+            color: rgba(255, 255, 255, 0.35);
             font-size: 2rem;
             font-weight: bold;
-            bottom: -150px; /* Start below screen */
-            
-            /* TRICK: Negative delay makes them start mid-air immediately */
-            animation: animate 25s linear infinite; 
+            bottom: -150px;
+            animation: animate 25s linear infinite;
         }
 
-        /* UPDATED SETTINGS:
-           1. Sizes are large.
-           2. animation-delay is NEGATIVE (e.g., -5s). 
-              This forces them to appear partially up the screen instantly.
-        */
+        /* --- ITEMS 1-10 (Original) --- */
         .circles li:nth-child(1) { left: 25%; font-size: 6rem; animation-delay: -5s; } 
         .circles li:nth-child(2) { left: 10%; font-size: 4rem; animation-duration: 12s; animation-delay: -2s; }
-        .circles li:nth-child(3) { left: 70%; font-size: 4rem; animation-delay: -10s; } /* High up instantly */
+        .circles li:nth-child(3) { left: 70%; font-size: 4rem; animation-delay: -10s; } 
         .circles li:nth-child(4) { left: 40%; font-size: 5rem; animation-duration: 18s; animation-delay: -4s; }
         .circles li:nth-child(5) { left: 65%; font-size: 3rem; animation-delay: -8s; }
-        .circles li:nth-child(6) { left: 75%; font-size: 7rem; animation-delay: -15s; } /* Very high up */
+        .circles li:nth-child(6) { left: 75%; font-size: 7rem; animation-delay: -15s; } 
         .circles li:nth-child(7) { left: 35%; font-size: 5rem; animation-delay: -6s; }
         .circles li:nth-child(8) { left: 50%; font-size: 3rem; animation-duration: 45s; animation-delay: -20s; }
         .circles li:nth-child(9) { left: 20%; font-size: 2rem; animation-duration: 35s; animation-delay: -12s; }
         .circles li:nth-child(10) { left: 85%; font-size: 6rem; animation-duration: 11s; animation-delay: -3s; }
+
+        /* --- ITEMS 11-20 (New - High Density) --- */
+        .circles li:nth-child(11) { left: 5%; font-size: 4rem; animation-delay: -7s; animation-duration: 22s; }
+        .circles li:nth-child(12) { left: 95%; font-size: 5rem; animation-delay: -18s; animation-duration: 19s; }
+        .circles li:nth-child(13) { left: 45%; font-size: 2rem; animation-delay: -1s; animation-duration: 14s; }
+        .circles li:nth-child(14) { left: 15%; font-size: 6rem; animation-delay: -22s; animation-duration: 28s; }
+        .circles li:nth-child(15) { left: 60%; font-size: 3rem; animation-delay: -11s; animation-duration: 32s; }
+        .circles li:nth-child(16) { left: 80%; font-size: 4rem; animation-delay: -4s; animation-duration: 16s; }
+        .circles li:nth-child(17) { left: 30%; font-size: 7rem; animation-delay: -16s; animation-duration: 40s; }
+        .circles li:nth-child(18) { left: 55%; font-size: 2rem; animation-delay: -9s; animation-duration: 24s; }
+        .circles li:nth-child(19) { left: 90%; font-size: 5rem; animation-delay: -14s; animation-duration: 20s; }
+        .circles li:nth-child(20) { left: 2%; font-size: 3rem; animation-delay: -24s; animation-duration: 36s; }
+
 
         @keyframes animate {
             0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; }
@@ -155,16 +162,11 @@
 
     <div class="area">
         <ul class="circles">
-            <li>➕</li>
-            <li>➖</li>
-            <li>✖️</li>
-            <li>➗</li>
-            <li>➕</li>
-            <li>➖</li>
-            <li>✖️</li>
-            <li>➗</li>
-            <li>📐</li>
-            <li>🔢</li>
+            <li>➕</li><li>➖</li><li>✖️</li><li>➗</li><li>➕</li>
+            <li>➖</li><li>✖️</li><li>➗</li><li>📐</li><li>🔢</li>
+            
+            <li>%</li><li>√</li><li>π</li><li>123</li><li>#</li>
+            <li>➕</li><li>➖</li><li>✖️</li><li>➗</li><li>=</li>
         </ul>
     </div>
 

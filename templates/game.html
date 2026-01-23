@@ -14,29 +14,87 @@
             align-items: center;
             justify-content: center;
             color: #333;
+            overflow: hidden; /* Prevents scrollbars from floating icons */
+            position: relative;
         }
 
+        /* --- BACKGROUND ANIMATION --- */
+        .area {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Puts it behind everything */
+        }
+
+        .circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .circles li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 2rem;
+            font-weight: bold;
+            bottom: -150px;
+            animation: animate 25s linear infinite;
+        }
+
+        /* Different speeds and positions for each particle */
+        .circles li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; font-size: 3rem; }
+        .circles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; font-size: 1.5rem; }
+        .circles li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+        .circles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; font-size: 2.5rem; }
+        .circles li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+        .circles li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; font-size: 4rem; }
+        .circles li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+        .circles li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+        .circles li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
+        .circles li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+
+        @keyframes animate {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; }
+        }
+
+        /* --- GAME UI --- */
         .score-pill {
             position: absolute;
             top: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(5px);
             padding: 10px 25px;
             border-radius: 50px;
             color: white;
             font-weight: bold;
             font-size: 1.2rem;
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            z-index: 10;
         }
 
         .game-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             padding: 50px;
             border-radius: 25px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4); /* Stronger shadow */
             text-align: center;
             width: 320px;
+            position: relative;
+            z-index: 10; /* Keeps card above animation */
             animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
@@ -53,8 +111,9 @@
             outline: none;
             transition: 0.3s;
             font-family: 'Poppins', sans-serif;
+            background: #fafafa;
         }
-        input:focus { border-color: #764ba2; }
+        input:focus { border-color: #764ba2; background: white; }
 
         button {
             width: 100%;
@@ -67,17 +126,41 @@
             font-weight: bold;
             border-radius: 15px;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.3);
         }
-        button:hover { transform: scale(1.05); }
+        button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(118, 75, 162, 0.4); }
 
         .back-link { display: block; margin-top: 25px; color: #999; text-decoration: none; font-size: 0.9rem; }
         .back-link:hover { color: #667eea; }
+
+        .footer {
+            position: absolute;
+            bottom: 15px;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            z-index: 10;
+        }
 
         @keyframes popIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body>
+
+    <div class="area">
+        <ul class="circles">
+            <li>➕</li>
+            <li>➖</li>
+            <li>✖️</li>
+            <li>➗</li>
+            <li>➕</li>
+            <li>➖</li>
+            <li>✖️</li>
+            <li>➗</li>
+            <li>📐</li>
+            <li>🔢</li>
+        </ul>
+    </div>
 
     <div class="score-pill">Score: {{ score }}</div>
 
@@ -95,6 +178,8 @@
 
         <a href="/" class="back-link">Quit Game</a>
     </div>
+
+    <div class="footer">Math Master • Keep Playing!</div>
 
 </body>
 </html>

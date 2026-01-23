@@ -1,41 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Math Master</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #eef2f5; margin: 0; }
-        
-        /* HEADER STYLE - Centered & Simple */
-        header { background-color: #2c3e50; color: white; padding: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .header-title { font-size: 24px; font-weight: bold; letter-spacing: 2px; }
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+        }
 
-        .center-box { display: flex; justify-content: center; align-items: center; height: 85vh; }
-        .card { background: white; width: 350px; padding: 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; }
-        h1 { color: #2c3e50; margin-bottom: 30px; }
-        
-        .option { background: #f8f9fa; margin-bottom: 12px; padding: 15px 20px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; transition: transform 0.2s; }
-        .option:hover { transform: scale(1.02); background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .label { font-weight: 600; color: #555; }
-        .btn { text-decoration: none; background-color: #4a90e2; color: white; padding: 8px 18px; border-radius: 20px; font-size: 14px; font-weight: bold; }
-        .btn:hover { background-color: #357abd; }
-        .mix-mode .btn { background-color: #6c5ce7; }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px 20px;
+            animation: fadeIn 1s ease-in;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            margin: 0;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            width: 90%;
+            margin: 40px 0;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, background 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .icon { font-size: 3rem; margin-bottom: 15px; display: block; }
+        .card-title { font-size: 1.5rem; font-weight: 600; display: block; }
+        .card-desc { font-size: 0.9rem; opacity: 0.8; margin-top: 5px; display: block; }
+
+
+        .add { border-bottom: 5px solid #48dbfb; }
+        .sub { border-bottom: 5px solid #ff9f43; }
+        .mul { border-bottom: 5px solid #ff6b6b; }
+        .div { border-bottom: 5px solid #1dd1a1; }
+        .mix { border-bottom: 5px solid #a29bfe; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-title">MATH GAME</div>
-    </header>
 
-    <div class="center-box">
-        <div class="card">
-            <h1>Select Mode 🎮</h1>
-            
-            <div class="option"><span class="label">Addition (+)</span><a href="/play/add" class="btn">Start</a></div>
-            <div class="option"><span class="label">Subtraction (-)</span><a href="/play/sub" class="btn">Start</a></div>
-            <div class="option"><span class="label">Multiplication (×)</span><a href="/play/mul" class="btn">Start</a></div>
-            <div class="option"><span class="label">Division (÷)</span><a href="/play/div" class="btn">Start</a></div>
-            <div class="option mix-mode"><span class="label">Mixed Mode (?)</span><a href="/play/mix" class="btn">Start</a></div>
-        </div>
+    <div class="hero">
+        <h1>MATH GAME</h1>
+        <p>Master arithmetic with endless challenges.</p>
     </div>
+
+    <div class="grid-container">
+        <a href="/play/add" class="card add">
+            <span class="icon">➕</span>
+            <span class="card-title">Addition</span>
+            <span class="card-desc">Start simple with sums.</span>
+        </a>
+
+        <a href="/play/sub" class="card sub">
+            <span class="icon">➖</span>
+            <span class="card-title">Subtraction</span>
+            <span class="card-desc">Practice taking away.</span>
+        </a>
+
+        <a href="/play/mul" class="card mul">
+            <span class="icon">✖️</span>
+            <span class="card-title">Multiplication</span>
+            <span class="card-desc">Master your times tables.</span>
+        </a>
+
+        <a href="/play/div" class="card div">
+            <span class="icon">➗</span>
+            <span class="card-title">Division</span>
+            <span class="card-desc">Split numbers evenly.</span>
+        </a>
+
+        <a href="/play/mix" class="card mix">
+            <span class="icon">🎲</span>
+            <span class="card-title">Mixed Mode</span>
+            <span class="card-desc">A random challenge every time!</span>
+        </a>
+    </div>
+
 </body>
 </html>

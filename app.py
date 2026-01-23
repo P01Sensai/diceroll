@@ -9,16 +9,14 @@ def menu():
 
 @app.route('/play/<mode>')
 def start_game(mode):
-    # GET THE SCORE: If no score is in the link (like starting fresh), default to 0
+
     current_score = request.args.get('score', 0, type=int)
 
-    # 1. Determine Operation
     if mode == 'mix':
         current_op = random.choice(['add', 'sub', 'mul', 'div'])
     else:
         current_op = mode
 
-    # 2. Generate Numbers
     if current_op == 'add':
         n1 = random.randint(1, 30)
         n2 = random.randint(1, 20)
@@ -48,21 +46,20 @@ def start_game(mode):
 
 @app.route('/check', methods=['POST'])
 def check_answer():
-    # Get data from the form
+
     user_guess = int(request.form['guess'])
     real_answer = int(request.form['real_ans'])
     mode = request.form['mode']
     current_score = int(request.form['current_score']) # Read the hidden score
     
     if user_guess == real_answer:
-        # CORRECT: Increase score and keep playing
         new_score = current_score + 1
         msg = "Correct! 🌟"
         color = "green"
         game_over = False
     else:
-        # WRONG: Game Over!
-        new_score = current_score # Final score to display
+
+        new_score = current_score 
         msg = f"Wrong! The answer was {real_answer}. 😅"
         color = "red"
         game_over = True

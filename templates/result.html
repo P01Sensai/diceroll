@@ -2,54 +2,76 @@
 <html>
 <head>
     <title>Result</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #eef2f5; margin: 0; }
-        
-        header { background-color: #2c3e50; color: white; padding: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .header-title { font-size: 24px; font-weight: bold; letter-spacing: 2px; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-        .center-box { display: flex; justify-content: center; align-items: center; height: 85vh; }
-        .card { background: white; width: 320px; padding: 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; }
-        h1 { margin-top: 0; font-size: 26px; line-height: 1.4; }
-        
-        .score-display { font-size: 18px; color: #555; margin: 20px 0; font-weight: bold; }
+        .result-card {
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            text-align: center;
+            width: 320px;
+            animation: slideUp 0.5s ease-out;
+        }
 
-        .btn-container { display: flex; gap: 10px; margin-top: 30px; }
-        a { flex: 1; text-decoration: none; padding: 12px 0; border-radius: 10px; font-weight: bold; font-size: 15px; transition: opacity 0.2s; }
+        h1 { margin: 0 0 10px; font-size: 2rem; }
+        .score-text { font-size: 1.2rem; color: #555; margin-bottom: 30px; }
+
+        .btn-group { display: flex; gap: 10px; }
         
-        .btn-next { background-color: #4a90e2; color: white; }
-        .btn-restart { background-color: #e74c3c; color: white; }
-        .btn-menu { background-color: #f1f2f6; color: #57606f; }
-        a:hover { opacity: 0.85; }
+        a {
+            flex: 1;
+            text-decoration: none;
+            padding: 15px 0;
+            border-radius: 12px;
+            font-weight: bold;
+            text-align: center;
+            color: white;
+            transition: 0.2s;
+        }
+        
+        .btn-next { background: #00b894; box-shadow: 0 5px 15px rgba(0,184,148,0.3); }
+        .btn-restart { background: #ff7675; box-shadow: 0 5px 15px rgba(255,118,117,0.3); }
+        .btn-menu { background: #dfe6e9; color: #636e72; }
+
+        a:hover { transform: translateY(-3px); }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-title">MATH GAME</div>
-    </header>
 
-    <div class="center-box">
-        <div class="card">
-            <h1 style="color: {{ color }};">{{ message }}</h1>
+    <div class="result-card">
+        <h1 style="color: {{ color }};">{{ message }}</h1>
+        
+        <div class="score-text">
+            {% if game_over %}
+                Final Score: <strong>{{ score }}</strong>
+            {% else %}
+                Current Score: <strong>{{ score }}</strong>
+            {% endif %}
+        </div>
+        
+        <div class="btn-group">
+            <a href="/" class="btn-menu">Menu</a>
             
-            <div class="score-display">
-                {% if game_over %}
-                    Final Score: {{ score }} 🏁
-                {% else %}
-                    Current Score: {{ score }} 🚀
-                {% endif %}
-            </div>
-            
-            <div class="btn-container">
-                <a href="/" class="btn-menu">Menu</a>
-                
-                {% if game_over %}
-                    <a href="/play/{{ mode }}?score=0" class="btn-restart">Restart 🔄</a>
-                {% else %}
-                    <a href="/play/{{ mode }}?score={{ score }}" class="btn-next">Next ➡</a>
-                {% endif %}
-            </div>
+            {% if game_over %}
+                <a href="/play/{{ mode }}?score=0" class="btn-restart">Restart</a>
+            {% else %}
+                <a href="/play/{{ mode }}?score={{ score }}" class="btn-next">Next Level</a>
+            {% endif %}
         </div>
     </div>
+
 </body>
 </html>

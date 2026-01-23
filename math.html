@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Game Project</title>
+    
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+
+        
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .header-title { font-size: 20px; font-weight: bold; }
+        .header-name { font-size: 16px; font-weight: normal; color: #bdc3c7; }
+
+        
+        .start-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 80vh; 
+            text-align: center;
+        }
+        .start-card {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 400px;
+        }
+        .start-btn {
+            background: #27ae60; 
+            font-size: 24px;
+            padding: 15px 40px;
+            margin-top: 20px;
+        }
+        .start-btn:hover { background: #2ecc71; }
+
+       
+        .game-container {
+            display: none; 
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+        .card { 
+            background: white; 
+            width: 350px; 
+            padding: 40px; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+            text-align: center;
+        }
+        .problem { font-size: 56px; font-weight: bold; color: #2c3e50; margin: 20px 0; }
+        
+        input { 
+            font-size: 28px; 
+            padding: 10px; 
+            width: 120px; 
+            text-align: center; 
+            border: 2px solid #dfe6e9; 
+            border-radius: 8px; 
+            outline: none;
+        }
+        input:focus { border-color: #3498db; }
+
+        button { 
+            background: #3498db; 
+            color: white; 
+            border: none; 
+            padding: 12px 24px; 
+            font-size: 18px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            margin-top: 20px; 
+            width: 100%;
+            transition: background 0.2s;
+        }
+        button:hover { background: #2980b9; }
+
+        #result-msg { margin-top: 20px; font-size: 20px; font-weight: bold; min-height: 30px; }
+        
+        .score-box {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            border-left: 5px solid #27ae60;
+        }
+
+        #py-terminal { display: none; } 
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">Math Game Project</div>
+        <div class="header-name">Pranjal Prajapati</div>
+    </header>
+
+    <div id="start-view" class="start-screen">
+        <div class="start-card">
+            <h1 style="margin:0; color:#2c3e50; font-size: 36px;">Ready?</h1>
+            <!-- <p style="color:#7f8c8d; font-size: 18px; margin: 15px 0 30px 0;">
+                Test your math skills with endless arithmetic challenges!
+            </p> -->
+            <button py-click="start_game" class="start-btn">Start Game ▶</button>
+        </div>
+    </div>
+
+    <div id="game-view" class="container game-container">
+        <div class="card">
+            <h2 style="margin-top: 0; color: #7f8c8d;">Solve this:</h2>
+            
+            <div id="problem-text" class="problem">Loading...</div>
+            
+            <input type="number" id="user_guess" placeholder="?">
+            
+            <button py-click="check_answer" id="submit-btn">Check Answer</button>
+            <button py-click="new_question" id="next-btn" style="display:none; background: #27ae60;">Next Question ➡</button>
+
+            <div id="result-msg"></div>
+        </div>
+    </div>
+
+    <div id="score-panel" class="score-box">
+        Current Score: <span id="score-val">0</span>
+    </div>
+
+    <script type="py">
+import random
+from pyscript import document
+
+current_ans = 0
+score = 0
+is_game_over = False
+
+def start_game(event=None):
+   
+    document.getElementById("start-view").style.display = "none"
+  
+    document.getElementById("game-view").style.display = "flex"
+    document.getElementById("score-panel").style.display = "block"
+
+    new_question()
+
+def new_question(event=None):
+    global current_ans, score, is_game_over
+    
+    if is_game_over:
+        score = 0
+        document.getElementById("score-val").innerText = "0"
+        is_game_over = False
+        document.getElementById("next-btn").innerText = "Next Question ➡"
+        document.getElementById("next-btn").style.background = "#27ae60"
+
+    op_type = random.choice(['+', '-', '*', '/'])
+    
+    if op_type == '+':
+        n1 = random.randint(1, 20)
+        n2 = random.randint(1, 20)
+        current_ans = n1 + n2
+        display_text = f"{n1} + {n2}"
+        
+    elif op_type == '-':
+        n1 = random.randint(10, 30)
+        n2 = random.randint(1, 10)
+        if n2 > n1: n1, n2 = n2, n1
+        current_ans = n1 - n2
+        display_text = f"{n1} - {n2}"
+        
+    elif op_type == '*':
+        n1 = random.randint(2, 10)
+        n2 = random.randint(2, 10)
+        current_ans = n1 * n2
+        display_text = f"{n1} × {n2}"
+        
+    elif op_type == '/':
+        n2 = random.randint(2, 9)
+        ans = random.randint(2, 9)
+        n1 = n2 * ans
+        current_ans = ans
+        display_text = f"{n1} ÷ {n2}"
+
+    document.getElementById("problem-text").innerText = display_text
+    document.getElementById("user_guess").value = ""
+    document.getElementById("result-msg").innerText = ""
+    document.getElementById("submit-btn").style.display = "inline-block"
+    document.getElementById("next-btn").style.display = "none"
+
+def check_answer(event=None):
+    global score, is_game_over
+    user_input = document.getElementById("user_guess").value
+    
+    if not user_input:
+        document.getElementById("result-msg").style.color = "#e67e22"
+        document.getElementById("result-msg").innerText = "Enter a number first!"
+        return
+
+    try:
+        guess = int(user_input)
+    except:
+        document.getElementById("result-msg").innerText = "Numbers only please!"
+        return
+    
+    if guess == current_ans:
+        score += 1
+        document.getElementById("score-val").innerText = str(score)
+        document.getElementById("result-msg").style.color = "#27ae60"
+        document.getElementById("result-msg").innerText = "Correct! Great Job!"
+        document.getElementById("submit-btn").style.display = "none"
+        document.getElementById("next-btn").style.display = "inline-block"
+    else:
+        is_game_over = True
+        document.getElementById("result-msg").style.color = "#c0392b"
+        document.getElementById("result-msg").innerText = f"Wrong! It was {current_ans}. Final Score: {score}"
+        document.getElementById("submit-btn").style.display = "none"
+
+        btn = document.getElementById("next-btn")
+        btn.style.display = "inline-block"
+        btn.innerText = "Restart Game "
+        btn.style.background = "#e74c3c"
+    </script>
+
+</body>
+</html>

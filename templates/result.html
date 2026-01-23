@@ -3,54 +3,52 @@
 <head>
     <title>Result</title>
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #eef2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .card {
-            background: white;
-            width: 320px;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            text-align: center;
-        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #eef2f5; margin: 0; }
+        
+        header { background-color: #2c3e50; color: white; padding: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .header-title { font-size: 24px; font-weight: bold; letter-spacing: 2px; }
+
+        .center-box { display: flex; justify-content: center; align-items: center; height: 85vh; }
+        .card { background: white; width: 320px; padding: 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; }
         h1 { margin-top: 0; font-size: 26px; line-height: 1.4; }
         
-        .btn-container {
-            display: flex;
-            gap: 10px;
-            margin-top: 30px;
-        }
-        a {
-            flex: 1;
-            text-decoration: none;
-            padding: 12px 0;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 15px;
-            transition: opacity 0.2s;
-        }
-        .btn-next { background-color: #4a90e2; color: white; }
-        .btn-menu { background-color: #f1f2f6; color: #57606f; }
+        .score-display { font-size: 18px; color: #555; margin: 20px 0; font-weight: bold; }
+
+        .btn-container { display: flex; gap: 10px; margin-top: 30px; }
+        a { flex: 1; text-decoration: none; padding: 12px 0; border-radius: 10px; font-weight: bold; font-size: 15px; transition: opacity 0.2s; }
         
+        .btn-next { background-color: #4a90e2; color: white; }
+        .btn-restart { background-color: #e74c3c; color: white; }
+        .btn-menu { background-color: #f1f2f6; color: #57606f; }
         a:hover { opacity: 0.85; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1 style="color: {{ color }};">
-            {{ message }}
-        </h1>
-        
-        <div class="btn-container">
-            <a href="/" class="btn-menu">Menu</a>
-            <a href="/play/{{ mode }}" class="btn-next">Next ➡</a>
+    <header>
+        <div class="header-title">MATH GAME</div>
+    </header>
+
+    <div class="center-box">
+        <div class="card">
+            <h1 style="color: {{ color }};">{{ message }}</h1>
+            
+            <div class="score-display">
+                {% if game_over %}
+                    Final Score: {{ score }} 🏁
+                {% else %}
+                    Current Score: {{ score }} 🚀
+                {% endif %}
+            </div>
+            
+            <div class="btn-container">
+                <a href="/" class="btn-menu">Menu</a>
+                
+                {% if game_over %}
+                    <a href="/play/{{ mode }}?score=0" class="btn-restart">Restart 🔄</a>
+                {% else %}
+                    <a href="/play/{{ mode }}?score={{ score }}" class="btn-next">Next ➡</a>
+                {% endif %}
+            </div>
         </div>
     </div>
 </body>

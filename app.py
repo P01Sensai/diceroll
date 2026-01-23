@@ -9,13 +9,18 @@ def menu():
 
 @app.route('/play/<mode>')
 def start_game(mode):
+    # GET THE SCORE: If no score is in the link (like starting fresh), default to 0
+    current_score = request.args.get('score', 0, type=int)
+
+    # 1. Determine Operation
     if mode == 'mix':
         current_op = random.choice(['add', 'sub', 'mul', 'div'])
     else:
         current_op = mode
 
+    # 2. Generate Numbers
     if current_op == 'add':
-        n1 = random.randint(1, 20)
+        n1 = random.randint(1, 30)
         n2 = random.randint(1, 20)
         symbol = "+"
         ans = n1 + n2
@@ -34,27 +39,35 @@ def start_game(mode):
         ans = n1 * n2
         
     elif current_op == 'div':
-        
         ans = random.randint(1, 10) 
+        n2 = random.randint(2, 10)
         n1 = n2 * ans
         symbol = "÷"
 
-    return render_template('game.html', n1=n1, n2=n2, symbol=symbol, real_ans=ans, mode=mode)
+    return render_template('game.html', n1=n1, n2=n2, symbol=symbol, real_ans=ans, mode=mode, score=current_score)
 
 @app.route('/check', methods=['POST'])
 def check_answer():
+    # Get data from the form
     user_guess = int(request.form['guess'])
     real_answer = int(request.form['real_ans'])
-    mode = request.form['mode'] 
+    mode = request.form['mode']
+    current_score = int(request.form['current_score']) # Read the hidden score
     
     if user_guess == real_answer:
-        msg = "Correct!🌟"
+        # CORRECT: Increase score and keep playing
+        new_score = current_score + 1
+        msg = "Correct! 🌟"
         color = "green"
+        game_over = False
     else:
-        msg = f"Oops! The answer was {real_answer}. 😅"
+        # WRONG: Game Over!
+        new_score = current_score # Final score to display
+        msg = f"Wrong! The answer was {real_answer}. 😅"
         color = "red"
+        game_over = True
         
-    return render_template('result.html', message=msg, color=color, mode=mode)
+    return render_template('result.html', message=msg, color=color, mode=mode, score=new_score, game_over=game_over)
 
 if __name__ == '__main__':
     app.run(debug=True)

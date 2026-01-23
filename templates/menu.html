@@ -3,81 +3,38 @@
 <head>
     <title>Math Master</title>
     <style>
-        /* Modern Reset & Font */
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #eef2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-        .card {
-            background: white;
-            width: 350px;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            text-align: center;
-        }
-        h1 { color: #2c3e50; margin-bottom: 30px; font-size: 28px; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #eef2f5; margin: 0; }
         
-        /* The Option Row */
-        .option {
-            background: #f8f9fa;
-            margin-bottom: 12px;
-            padding: 15px 20px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.2s;
-        }
+        /* HEADER STYLE - Centered & Simple */
+        header { background-color: #2c3e50; color: white; padding: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .header-title { font-size: 24px; font-weight: bold; letter-spacing: 2px; }
+
+        .center-box { display: flex; justify-content: center; align-items: center; height: 85vh; }
+        .card { background: white; width: 350px; padding: 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; }
+        h1 { color: #2c3e50; margin-bottom: 30px; }
+        
+        .option { background: #f8f9fa; margin-bottom: 12px; padding: 15px 20px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; transition: transform 0.2s; }
         .option:hover { transform: scale(1.02); background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        
         .label { font-weight: 600; color: #555; }
-        
-        /* The Button */
-        .btn {
-            text-decoration: none;
-            background-color: #4a90e2;
-            color: white;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
+        .btn { text-decoration: none; background-color: #4a90e2; color: white; padding: 8px 18px; border-radius: 20px; font-size: 14px; font-weight: bold; }
         .btn:hover { background-color: #357abd; }
-        
-        /* Specific Colors for variety */
         .mix-mode .btn { background-color: #6c5ce7; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>Math Master 🎓</h1>
-        
-        <div class="option">
-            <span class="label">Addition (+)</span>
-            <a href="/play/add" class="btn">Start</a>
-        </div>
-        <div class="option">
-            <span class="label">Subtraction (-)</span>
-            <a href="/play/sub" class="btn">Start</a>
-        </div>
-        <div class="option">
-            <span class="label">Multiplication (×)</span>
-            <a href="/play/mul" class="btn">Start</a>
-        </div>
-        <div class="option">
-            <span class="label">Division (÷)</span>
-            <a href="/play/div" class="btn">Start</a>
-        </div>
-        <div class="option mix-mode">
-            <span class="label">Mixed Mode (?)</span>
-            <a href="/play/mix" class="btn">Start</a>
+    <header>
+        <div class="header-title">MATH GAME</div>
+    </header>
+
+    <div class="center-box">
+        <div class="card">
+            <h1>Select Mode 🎮</h1>
+            
+            <div class="option"><span class="label">Addition (+)</span><a href="/play/add" class="btn">Start</a></div>
+            <div class="option"><span class="label">Subtraction (-)</span><a href="/play/sub" class="btn">Start</a></div>
+            <div class="option"><span class="label">Multiplication (×)</span><a href="/play/mul" class="btn">Start</a></div>
+            <div class="option"><span class="label">Division (÷)</span><a href="/play/div" class="btn">Start</a></div>
+            <div class="option mix-mode"><span class="label">Mixed Mode (?)</span><a href="/play/mix" class="btn">Start</a></div>
         </div>
     </div>
 </body>
